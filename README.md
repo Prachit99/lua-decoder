@@ -1,2 +1,39 @@
-# lua-decoder
+# ___lua-decoder___
 This is an assignment repository for the course ASE (CSC 591)
+
+
+[![DOI](https://zenodo.org/badge/589028280.svg)](https://zenodo.org/badge/latestdoi/589028280)
+![GitHub repo size](https://img.shields.io/github/repo-size/Prachit99/lua-decoder)
+![GitHub](https://img.shields.io/github/license/Prachit99/lua-decoder)
+![GitHub issues](https://img.shields.io/github/issues/Prachit99/lua-decoder)
+![GitHub closed issues](https://img.shields.io/github/issues-closed/Prachit99/lua-decoder)
+![GitHub contributors](https://img.shields.io/github/contributors/Prachit99/lua-decoder)
+
+## Pre-requisites
+To run these scripts, you will require Python installed on your PC. Please visit [Python Installers](https://www.python.org/downloads/) to download the lastest python version.
+
+## Installation
+Initially you can check whether your system has python pre-installed or not, usually nowadays in most of the systems, be it Windows or MacOS, python is pre-installed. 
+
+To check whether you have python installed or not, you can open CMD or a Terminal and run the command "python --version". If the CMD shows the version such as Python 3.6.7 then your system already has python installed and you just need to clone the repository and run the python scripts. 
+
+If this is not the case, then you need to download python installer package from [Python Installers](https://www.python.org/downloads/) based on your system's operating system and install it and you can further clone this repository to execute the scripts.
+
+
+## Contribution Code of Conduct
+
+The rules listed below are to be followed by the ones who will be contributing to the code in the repository:
+
+  - Atleast one review/approval is required from any other contributors of the project to merge a commit to the main branch.
+  - It is recommended to delete the branch as soon as it is merged to the main branch to avoid stale branches in the repository.
+  - It is encouraged to add name tags such as "feature-" or "patch-" in the branches if it is used to add code-patches or features in the project.
+
+
+## Contributors 
+
+<table>
+  <tr>
+    <td align="center"><a href="https://github.com/Prachit99"><img src="https://avatars.githubusercontent.com/Prachit99" width="100px;" alt=""/><br /><sub><b>Prachit99</b></sub></a></td>
+    <td align="center"><a href="https://github.com/Darkspur"><img src="https://avatars.githubusercontent.com/Darkspur" width="100px;" alt=""/><br /><sub><b>Sahil Sawant Joshi</b></sub></a><br /></td>
+  </tr>
+</table>
