@@ -1,8 +1,9 @@
 import sys
-sys.path.insert(1, "../lua")
+#sys.path.insert(1, "../code")
+sys.path.append("./code")
 import Num
-import The
-from Utils import rnd
+#import The
+#from Utils import rnd
 
 class TestNum:
 
@@ -18,7 +19,7 @@ class TestNum:
         std = num.div()
         #print("Mid =", mid)
         #print("div =", div)
-        return (mean==11/7 and rnd(std)==0.787)
+        return (mean==11/7 and round(std,3)==0.787)
         #Lua has div range between 30.5 to 32 but the answer on calculation comes between 27.5 to 29
         # if(50 <= mid <= 52) and (27.5 < div < 29):
         #     return 0

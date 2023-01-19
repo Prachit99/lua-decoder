@@ -1,7 +1,7 @@
 import sys
-sys.path.insert(1, "../code")
+sys.path.append("./code")
 import Sym
-from Utils import rnd
+#from Utils import rnd
 
 class TestSym:
 
@@ -16,7 +16,7 @@ class TestSym:
         #entropy = (1000*entropy//1)/1000
         #print(" Mode =", mode)
         #print("Entropy =", entropy)
-        return (mode == "a" and 1.379 == rnd(entropy))
+        return (mode == "a" and 1.379 == round(entropy,3))
 #CHECK OBJECTS
 if __name__ == '__main__':
         result = TestSym.testSym(1)
