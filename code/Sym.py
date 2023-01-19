@@ -25,7 +25,7 @@ class Sym:
 
 
     # Method to return the entropy of the class Sym
-    def dev(self) -> float:
+    def div(self) -> float:
         def std_form(p):
             return p * math.log(p, 2)
         
