@@ -1,0 +1,27 @@
+# This CITATION.cff file was generated with cffinit.
+# Visit https://bit.ly/cffinit to generate yours today!
+
+cff-version: 1.2.0
+title: Lua Decoder
+message: Please use this information for citation
+type: software
+authors:
+  - given-names: Prachit
+    family-names: Mhalgi
+    email: psmhalgi@ncsu.edu
+  - given-names: Sahil
+    family-names: Sawant
+    email: ssawant2@ncsu.edu
+  - given-names: 'Neha '
+    family-names: Patil
+    email: npatil2@ncsu.edu
+identifiers:
+  - type: doi
+    value: 10.5281/zenodo.7542741
+keywords:
+  - lua
+  - python
+license: MIT
+commit: Initial Release
+version: 0.1.0
+date-released: '2023-01-16'
