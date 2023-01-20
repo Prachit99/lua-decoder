@@ -9,8 +9,8 @@ def rint(lo,hi):
 def rand(lo=0,hi=1):
     global seed
     seed = (16807 * seed) % 2147483647
+    # print(seed)
     return lo + (hi - lo) * seed / 2147483647
-
 def rnd(n,nPlaces=3):
     mult = 10**(nPlaces)
     return math.floor(n * mult + 0.5) / mult
