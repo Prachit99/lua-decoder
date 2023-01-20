@@ -1,14 +1,19 @@
 # ___lua-decoder___
 This is an assignment repository for the course ASE (CSC 591)
 
+<img src="/etc/AUTOMATED%20SOFTWARE%20ENGINEERING.png" width="1000" height="500"/>
 
-[![DOI](https://zenodo.org/badge/589028280.svg)](https://zenodo.org/badge/latestdoi/589028280)
-![GitHub repo size](https://img.shields.io/github/repo-size/Prachit99/lua-decoder)
-![GitHub](https://img.shields.io/github/license/Prachit99/lua-decoder)
-![GitHub issues](https://img.shields.io/github/issues/Prachit99/lua-decoder)
-![GitHub closed issues](https://img.shields.io/github/issues-closed/Prachit99/lua-decoder)
-![GitHub contributors](https://img.shields.io/github/contributors/Prachit99/lua-decoder)
-
+<div align="center">
+  
+  [![DOI](https://zenodo.org/badge/589028280.svg)](https://zenodo.org/badge/latestdoi/589028280)
+  ![GitHub repo size](https://img.shields.io/github/repo-size/Prachit99/lua-decoder)
+  ![GitHub](https://img.shields.io/github/license/Prachit99/lua-decoder)
+  ![GitHub issues](https://img.shields.io/github/issues/Prachit99/lua-decoder)
+  ![GitHub closed issues](https://img.shields.io/github/issues-closed/Prachit99/lua-decoder)
+  ![GitHub contributors](https://img.shields.io/github/contributors/Prachit99/lua-decoder)
+  
+</div>
+  
 ## Pre-requisites
 To run these scripts, you will require Python installed on your PC. Please visit [Python Installers](https://www.python.org/downloads/) to download the lastest python version.
 
