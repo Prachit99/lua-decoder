@@ -1,6 +1,5 @@
 import sys
-#sys.path.insert(1, "../code")
-sys.path.append("./code")
+sys.path.insert(1, "../code")
 import Num
 #import The
 #from Utils import rnd
