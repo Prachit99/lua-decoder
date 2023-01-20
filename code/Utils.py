@@ -7,6 +7,7 @@ def rint(lo,hi):
     return math.floor(0.5 + rand(lo,hi))
 
 def rand(lo=0,hi=1):
+    global seed
     seed = (16807 * seed) % 2147483647
     return lo + (hi - lo) * seed / 2147483647
 
