@@ -6,12 +6,13 @@ This is an assignment repository for the course ASE (CSC 591)
 <div align="center">
   
   [![DOI](https://zenodo.org/badge/589028280.svg)](https://zenodo.org/badge/latestdoi/589028280)
-  ![GitHub repo size](https://img.shields.io/github/repo-size/Prachit99/lua-decoder)
-  ![GitHub](https://img.shields.io/github/license/Prachit99/lua-decoder)
-  ![GitHub issues](https://img.shields.io/github/issues/Prachit99/lua-decoder)
-  ![GitHub closed issues](https://img.shields.io/github/issues-closed/Prachit99/lua-decoder)
-  ![GitHub contributors](https://img.shields.io/github/contributors/Prachit99/lua-decoder)
   
+  <a href="https://github.com/Prachit99/lua-decoder"><img src="https://img.shields.io/github/repo-size/Prachit99/lua-decoder?style=for-the-badge"></a>
+  <a href="https://github.com/Prachit99/lua-decoder/blob/main/LICENSE"><img src="https://img.shields.io/github/license/Prachit99/lua-decoder?style=for-the-badge"></a>
+  <a href="https://github.com/Prachit99/lua-decoder/issues"><img src="https://img.shields.io/github/issues/Prachit99/lua-decoder?style=for-the-badge"/></a>
+  <a href="https://github.com/Prachit99/lua-decoder/issues?q=is%3Aissue+is%3Aclosed"><img src="https://img.shields.io/github/issues-closed/Prachit99/lua-decoder?style=for-the-badge"/></a>
+  <a href="https://github.com/Prachit99/lua-decoder/graphs/contributors"><img src="https://img.shields.io/github/contributors/Prachit99/lua-decoder?style=for-the-badge"/></a>
+  <a href="https://github.com/Prachit99/lua-decoder/actions/workflows/python-app.yml"><img alt="GitHub Workflow Status" src="https://img.shields.io/github/actions/workflow/status/Prachit99/lua-decoder/python-app.yml?style=for-the-badge"></a>
 </div>
   
 ## Pre-requisites
