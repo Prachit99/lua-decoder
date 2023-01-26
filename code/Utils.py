@@ -1,7 +1,9 @@
 import math
+import Constants
 
-# Utility functions for numerics
-seed = 937162211
+const = Constants.Constants()
+seed = const.seed
+
 
 def rint(lo,hi):
     return math.floor(0.5 + rand(lo,hi))
@@ -33,11 +35,26 @@ def oo(t):
     return t
 
 def coerce(s):
+    s = str(s)
     def fun(s1):
-        return True if s1 == "true" else False
-        return s1
-
-
+        s1 = s1.lower()
+        print(s1)
+        if s1 == "true":
+            return True
+        elif s1 == "false":
+            return False
+        else:
+            return s1
+    fun(s)
+    try:
+        return int(s)
+    except ValueError:
+        try:
+            return float(s)
+        except ValueError:
+            return fun(s)
+    except Exception as exception:
+        print("Coerce Error", exception)
 
 # Utility functions for Lists
 def map(t,fun):
