@@ -3,21 +3,30 @@ import math
 # Utility functions for numerics
 seed = 937162211
 
+
 def rint(lo,hi):
     return math.floor(0.5 + rand(lo,hi))
 
+
 def rand(lo=0,hi=1):
+    """
+    This function generates the random number between a given range
+    """
     global seed
     seed = (16807 * seed) % 2147483647
     # print(seed)
     return lo + (hi - lo) * seed / 2147483647
+
+
 def rnd(n,nPlaces=3):
     mult = 10**(nPlaces)
     return math.floor(n * mult + 0.5) / mult
 
+
 # Utility functions for Strings
 def fmt(**sControl):
     return print(sControl)
+
 
 def o(t,isKeys):
     if type(t) != list:
@@ -27,16 +36,15 @@ def o(t,isKeys):
             return fmt(":{} {}",o(k),o(v))
 
 
-
 def oo(t):
     print(o(t))
     return t
+
 
 def coerce(s):
     def fun(s1):
         return True if s1 == "true" else False
         return s1
-
 
 
 # Utility functions for Lists
@@ -48,6 +56,7 @@ def map(t,fun):
         u[index] = v
     return u
 
+
 def kap(t,fun):
     u = []
     for k,v in enumerate(t):
@@ -56,8 +65,10 @@ def kap(t,fun):
         u[index] = v
     return u
 
+
 def sort(t,fun):
     return sorted(t, key = fun)
+
 
 def keys(t):
     return sorted(kap(t,))
