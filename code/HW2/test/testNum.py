@@ -12,7 +12,7 @@ class TestNum:
 
         mean = num.mid()
         std = num.div()
-        return (mean==11/7 and round(std,3)==0.787)
+        return (mean==11/7 and num.rnd(std,3)==0.787)
 
 
 if __name__ == '__main__':
