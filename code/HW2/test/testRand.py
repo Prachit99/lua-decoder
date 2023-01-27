@@ -7,7 +7,7 @@ class TestRand:
     def testRand(self):
         num1 = Num.Num()
         num2 = Num.Num()
-        SEED=seed 
+        local_seed = seed 
         for i in range(1,1001):
             num1.add(rand(0,1))
             num2.add(rand(0,1))
