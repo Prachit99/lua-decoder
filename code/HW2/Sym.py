@@ -37,5 +37,6 @@ class Sym:
         return -e
     
 
-    def rnd(self, x:str, n) -> str:
+    # Method to return a rounded string
+    def rnd(self, x:str) -> str:
         return x

@@ -1,9 +1,13 @@
 import math
+import Constants
+import io
+import re
+
+const = Constants.Constants()
+seed = const.seed
+
 
 # Utility functions for numerics
-seed = 937162211
-
-
 def rint(lo,hi):
     return math.floor(0.5 + rand(lo,hi))
 
@@ -42,9 +46,26 @@ def oo(t):
 
 
 def coerce(s):
+    s = str(s)
     def fun(s1):
-        return True if s1 == "true" else False
-        return s1
+        s1 = s1.lower()
+        print(s1)
+        if s1 == "true":
+            return True
+        elif s1 == "false":
+            return False
+        else:
+            return s1
+    s = fun(s)
+    try:
+        return int(s)
+    except ValueError:
+        try:
+            return float(s)
+        except ValueError:
+            return fun(s)
+    except Exception as exception:
+        print("Coerce Error", exception)
 
 
 # Utility functions for Lists
@@ -72,3 +93,16 @@ def sort(t,fun):
 
 def keys(t):
     return sorted(kap(t,))
+
+
+def csv(filename: str, fun):
+    f = io.open(sFilename)
+    while True:
+        s = f.read()
+        if s:
+            t = []
+            for s1 in re.findall("([^,]+)" ,s):
+                t.append(coerce(s1))
+            fun(t)
+        else:
+            return f.close()
