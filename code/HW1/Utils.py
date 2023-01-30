@@ -70,5 +70,3 @@ def sort(t,fun):
     return sorted(t, key = fun)
 
 
-def keys(t):
-    return sorted(kap(t,))
