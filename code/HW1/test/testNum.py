@@ -1,11 +1,9 @@
 import sys
-sys.path.insert(1, "../code")
+sys.path.insert(1, "../")
 import Num
-#import The
-#from Utils import rnd
+
 
 class TestNum:
-
     def testNum(self):
         num = Num.Num()
         li=[1,1,1,1,2,2,3]
@@ -14,8 +12,8 @@ class TestNum:
 
         mean = num.mid()
         std = num.div()
-
         return (mean==11/7 and round(std,3)==0.787)
+
 
 if __name__ == '__main__':
         result = TestNum.testNum(1)

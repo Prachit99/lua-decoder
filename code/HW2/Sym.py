@@ -2,7 +2,9 @@ import math
 
 class Sym:
     # Constructor for Sym class
-    def __init__(self):
+    def __init__(self, at:int=0, txt:str=""):
+        self.at = at
+        self.txt = txt
         self.n = 0
         self.has = {}
         self.most = 0
@@ -33,3 +35,8 @@ class Sym:
         for key,val in self.has.items():
             e += std_form(val/self.n)
         return -e
+    
+
+    # Method to return a rounded string
+    def rnd(self, x:str) -> str:
+        return x
