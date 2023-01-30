@@ -4,11 +4,6 @@ from Utils import coerce
 import Constants
 
 
-def send_help():
-    global help
-    return help
-
-
 def settings(s):
     regexp = "\n[\s]+[-][\S]+[\s]+[-][-]([\S]+)[^\n]+= ([\S]+)"
     value = re.findall(regexp, s)
@@ -21,11 +16,9 @@ def cli(s):
     for k, v in value:
         const.the[k] = coerce(v)
     the = const.the
-    # print(f'the: {the}')
 
     args = sys.argv
     args = args[1:]
-    # print(f'args: {args}')
     keys = the.keys()
     for key in keys:
         val = str(the[key])
@@ -39,46 +32,23 @@ def cli(s):
 def main(options,help,funs):
     saved = dict()
     fails = 0
-
     for k,v in cli(help).items():
         options[k] = v
-        # print(f'k: {k}')
         saved[k] = v
 
-    print(options)
     if options['help']:
         print(help)
 
     else:
-        # print("reached 56")
-        print(funs)
         for what,fun, in funs.items():
-            print("reached 56")
             if options['go'] == 'all' or what == options['go']:
                 for k, v in saved.items():
                     options[k] = v
                 # seed = options['seed']
-                if funs[what]() == False:
+                if funs[what](1) == False:
                     fails += 1
                     print("❌ fail:", what)
                 else:
                     print("✅ pass:", what)
 
     exit(fails)
-
-
-if __name__ == '__main__':
-    options = dict()
-    help = '''
-    script.lua : an example script with help text and a test suite
-    (c)2022, Tim Menzies <timm@ieee.org>, BSD-2 
-    USAGE:   script.lua  [OPTIONS] [-g ACTION]
-    OPTIONS:
-      -d  --dump  on crash, dump stack = false
-      -g  --go    start-up action      = data
-      -h  --help  show help            = false
-      -s  --seed  random number seed   = 937162211
-    ACTIONS:
-    '''
-    funs = {}
-    main(options,help,funs)

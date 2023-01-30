@@ -18,7 +18,6 @@ def rand(lo=0,hi=1):
     """
     global seed
     seed = (16807 * seed) % 2147483647
-    # print(seed)
     return lo + (hi - lo) * seed / 2147483647
 
 
@@ -49,7 +48,6 @@ def coerce(s):
     s = str(s)
     def fun(s1):
         s1 = s1.lower()
-        print(s1)
         if s1 == "true":
             return True
         elif s1 == "false":
