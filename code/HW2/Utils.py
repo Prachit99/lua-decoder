@@ -96,7 +96,7 @@ def keys(t):
 
 
 def csv(filename: str, fun):
-    f = io.open(sFilename)
+    f = io.open(filename)
     while True:
         s = f.read()
         if s:
