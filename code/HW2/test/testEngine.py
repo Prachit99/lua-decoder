@@ -4,7 +4,7 @@ import Main
 import Constants
 from testNum import TestNum
 from testSym import TestSym
-# from testThe import TestThe
+from testThe import TestThe
 from testRand import TestRand
 
 
@@ -17,10 +17,11 @@ def eg(key, s, fun):
     help += "  -g  {}\t{}\n".format(key, s)
 
 
-# eg("the", "show settings", TestThe.testThe)
 eg("rand", "check random", TestRand.testRand)
 eg("sym", "check syms", TestSym.testSym)
 eg("num", "check nums", TestNum.testNum)
+eg("the", "check the", TestThe.testThe)
+
 # eg("csv","read from csv", check_csv)
 
 const = Constants.Constants()
