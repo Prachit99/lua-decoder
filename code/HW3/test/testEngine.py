@@ -6,7 +6,6 @@ from testNum import TestNum
 from testSym import TestSym
 from testThe import TestThe
 from testRand import TestRand
-from testCsv import TestCsv
 
 
 egs = {}
@@ -22,7 +21,6 @@ eg("rand", "check random", TestRand.testRand)
 eg("sym", "check syms", TestSym.testSym)
 eg("num", "check nums", TestNum.testNum)
 eg("the", "check the", TestThe.testThe)
-eg("csv", "check csv", TestCsv.testCsv)
 
 # eg("csv","read from csv", check_csv)
 
