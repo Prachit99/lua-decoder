@@ -1,12 +1,3 @@
-from Utils import csv
-from Utils import map
-from Utils import kap
-from Utils import sort
-from Utils import cosine
-from Utils import many
-from Utils import any
-from Utils import push
-from Utils import lt
 import Utils 
 from Row import Row
 from Cols import Cols
@@ -21,9 +12,8 @@ class Data:
         if type(src)==str:
             self.csv(src,fun)
         else:
-            #DOUBT FUNC CALL
             if(src!=None):
-                Utils.map(src,fun)
+                Utils.csv(src,fun)
             else:
                 Utils.map([],fun)
     
@@ -46,23 +36,11 @@ class Data:
             Utils.map([],fun)
         return data
 
-#DOUBT
     def stats(self,what,cols,nPlaces,fun):
-        def fun(k,col):
-            return col.rnd((col,what)(), nPlaces), col.txt
-        return kap(cols or self.cols.y, fun)
-    
-
-    def better(self,row1,row2):
-        s1=0
-        s2=0
-        ys=self.cols.y
-        for col in ys:
-            x=col.norm(row1.cells[col.at])
-            y=col.norm(row2.cells[col.at])
-            s1=s1-(pow(math.e,(col.w*(x-y))/len(ys)))
-            s2=s2-(pow(math.e,(col.w*(y-x))/len(ys)))
-        return s1/len(ys) < s2/len(ys)
+        def fun(col):
+            temp = getattr(col, what)
+            return col.rnd(temp, nPlaces), col.txt
+        return Utils.kap(cols, fun)
     
 
     def dist(self,row1,row2,cols=None):
@@ -88,6 +66,11 @@ class Data:
             around_li.append((r, self.dist(row1, r, cols)))
             around_li.sort(key = lambda x:x[1])
         return around_li
+    
+
+    def furthest(self,row1,rows,cols=None):
+        t=self.around(row1,rows,cols)
+        return t[len(t)]
 
 
     def half(self,rows=None,cols=None,above=None):
@@ -96,16 +79,16 @@ class Data:
         B=self.around(A,some)[The.Far*len(rows)//1].row
         c=self.dist(A,B,cols)
         def project(row,A,B,c,cols):
-            return {row,cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
+            return {row,Utils.cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
         rows=rows if rows!=None else self.rows
         left=[]
         right=[]
-        for n,tmp in enumerate(sort(Utils.map(rows,project),lt("dist"))):
+        for n,tmp in enumerate(Utils.sort(Utils.map(rows,project),Utils.lt("dist"))):
             if n<=(len(rows)//2):
-                push(left,tmp.row)
+                Utils.push(left,tmp.row)
                 mid=tmp.row
             else:
-                push(right,tmp.row)
+                Utils.push(right,tmp.row)
         return left,right,A,B,mid,c
     
 
@@ -116,22 +99,10 @@ class Data:
         node={"data":self.clone(rows)}
         if len(rows)>2*minn:
             left,right,node["A"],node["B"],node["mid"]=self.half(rows,cols,above)
-            node.left=self.cluster(left,minn,cols,node["A"])
-            node.right=self.cluster(right,minn,cols,node["B"])
+            node["left"]=self.cluster(left,minn,cols,node["A"])
+            node["right"]=self.cluster(right,minn,cols,node["B"])
         return node
     
-
-    def sway(self,rows=None,minn=None,cols=None,above=None):
-        rows=rows if rows!=None else self.rows
-        minn=minn if minn!=None else pow(len(rows),The.minn)
-        cols=cols if cols!=None else self.cols.x
-        node={"data":self.clone(rows)}
-        if len(rows)>2*minn:
-            left,right,node["A"],node["B"],node["mid"],node["c"]=self.half(rows,cols,above)
-            if self.better(node["B"],node["A"]):
-                left,right,node["A"],node["B"]=right,left,node["B"],node["A"]
-            node.left=self.sway(left,minn,cols,node["A"])
-        return node
 
 
         
