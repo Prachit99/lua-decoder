@@ -21,9 +21,8 @@ class Data:
         if type(src)==str:
             self.csv(src,fun)
         else:
-            #DOUBT FUNC CALL
             if(src!=None):
-                Utils.map(src,fun)
+                Utils.csv(src,fun)
             else:
                 Utils.map([],fun)
     
@@ -46,11 +45,11 @@ class Data:
             Utils.map([],fun)
         return data
 
-#DOUBT
     def stats(self,what,cols,nPlaces,fun):
-        def fun(k,col):
-            return col.rnd((col,what)(), nPlaces), col.txt
-        return kap(cols or self.cols.y, fun)
+            def fun(col):
+                temp = getattr(col, what)
+                return col.rnd(temp, nPlaces), col.txt
+            return Utils.kap(cols, fun)
     
 
     def better(self,row1,row2):
@@ -116,8 +115,8 @@ class Data:
         node={"data":self.clone(rows)}
         if len(rows)>2*minn:
             left,right,node["A"],node["B"],node["mid"]=self.half(rows,cols,above)
-            node.left=self.cluster(left,minn,cols,node["A"])
-            node.right=self.cluster(right,minn,cols,node["B"])
+            node["left"]=self.cluster(left,minn,cols,node["A"])
+            node["right"]=self.cluster(right,minn,cols,node["B"])
         return node
     
 
