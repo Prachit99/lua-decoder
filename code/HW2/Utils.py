@@ -67,13 +67,13 @@ def coerce(s):
 
 
 # Utility functions for Lists
-def map(t,fun):
-    u = []
-    for k,v in enumerate(t):
-        v,k = fun(k)
-        index = k if k != 0 else 1+len(u)
-        u[index] = v
-    return u
+# def map(t,fun):
+    # u = []
+    # for k,v in enumerate(t):
+    #     v,k = fun(k)
+    #     index = k if k != 0 else 1+len(u)
+    #     u[index] = v
+    # return u
 
 
 def kap(t,fun):
@@ -94,13 +94,10 @@ def keys(t):
 
 
 def csv(filename: str, fun):
-    f = io.open(filename)
-    while True:
-        s = f.read()
-        if s:
-            t = []
-            for s1 in re.findall("([^,]+)" ,s):
-                t.append(coerce(s1))
-            fun(t)
-        else:
-            return f.close()
+    file = io.open(filename)
+    t = []
+    for line in file.readlines():
+        row = list(map(coerce, line.strip().split(',')))
+        t.append(row)
+        fun(row)
+    file.close()

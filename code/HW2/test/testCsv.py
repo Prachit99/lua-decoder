@@ -1,15 +1,11 @@
 from Utils import csv
 import Constants
+n = 0
+def no_of_chars(t):
+    global n 
+    n += len(t)
 
-class TestCsv:
-
-    def testCsv(self):
-
-        self.n = 0
-
-        def f(t):
-            self.n += len(t)
-
-        file = Constants.Constants().file
-        csv(file,f)
-        return self.n == 8*399
+def testCsv():
+    file = Constants.Constants().file
+    csv(file,no_of_chars)
+    return n == 8*399
