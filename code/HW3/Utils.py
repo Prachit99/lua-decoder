@@ -47,10 +47,9 @@ def oo(t):
 def coerce(s):
     s = str(s)
     def fun(s1):
-        s1 = s1.lower()
-        if s1 == "true":
+        if s1.lower() == "true":
             return True
-        elif s1 == "false":
+        elif s1.lower() == "false":
             return False
         else:
             return s1
@@ -67,21 +66,23 @@ def coerce(s):
 
 
 # Utility functions for Lists
-def map(t,fun):
-    u = []
-    for k,v in enumerate(t):
-        v,k = fun(k)
-        index = k if k != 0 else 1+len(u)
-        u[index] = v
-    return u
+# def map(t,fun):
+#     u = []
+#     for k,v in enumerate(t):
+#         v,k = fun(k)
+#         index = k if k != 0 else 1+len(u)
+#         u[index] = v
+#     return u
 
 
-def kap(t,fun):
-    u = []
+def kap(t, fun):
+    u = {}
     for k,v in enumerate(t):
+        # print(k, v.txt)
         v,k = fun(k,v)
         index = k if k != 0 else 1 + len(u)
         u[index] = v
+    # print(u)
     return u
 
 

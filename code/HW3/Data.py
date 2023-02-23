@@ -14,26 +14,35 @@ import math
 import The
 
 class Data:
-    def __init__(self,src=None):
+    def __init__(self,src):
         self.rows = []
         self.cols = None
         fun=lambda x: self.add(x)
         if type(src)==str:
-            self.csv(src,fun)
+            csv(src,fun)
         else:
-            if(src!=None):
-                Utils.csv(src,fun)
-            else:
-                Utils.map([],fun)
-    
+            for row in src:
+                print(f'row: {row}')
+                print(f'type: {type(row)}')
+                self.add(row)
 
     def add(self,t):
-        if(len(self.cols)!=0):
-            t=Row(t)
+        if self.cols:
+            t = Row(t) if type(t) == list else t
             self.rows.append(t)
             self.cols.add(t)
         else:
             self.cols=Cols(t)
+
+
+    def stats(self,what,cols,nPlaces):
+        def fun(_, col):
+            if what == 'div':
+                val = col.div()
+            else:
+                val = col.mid()
+            return col.rnd(val, nPlaces), col.txt
+        return kap(cols or self.cols.y, fun)
 
 
     def clone(self,init=None):
@@ -45,12 +54,6 @@ class Data:
             Utils.map([],fun)
         return data
 
-    def stats(self,what,cols,nPlaces,fun):
-            def fun(col):
-                temp = getattr(col, what)
-                return col.rnd(temp, nPlaces), col.txt
-            return Utils.kap(cols, fun)
-    
 
     def better(self,row1,row2):
         s1=0

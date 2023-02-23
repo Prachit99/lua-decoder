@@ -7,6 +7,8 @@ from testSym import testSym
 from testThe import testThe
 from testRand import testRand
 from testCsv import testCsv
+from testData import testData
+from testStats import testStats
 
 
 egs = {}
@@ -23,6 +25,9 @@ eg("sym", "check syms", testSym)
 eg("num", "check nums", testNum)
 eg("the", "check the", testThe)
 eg("csv", "check csv", testCsv)
+eg("data", "check data", testData)
+eg("stats", "check stats", testStats)
+
 
 
 const = Constants.Constants()
