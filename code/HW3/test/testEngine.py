@@ -9,6 +9,11 @@ from testRand import testRand
 from testCsv import testCsv
 from testData import testData
 from testStats import testStats
+from testAround import testAround
+from testClone import testClone
+from testCluster import testCluster
+from testHalf import testHalf
+from testOptimize import testOptimize
 
 
 egs = {}
@@ -27,7 +32,11 @@ eg("the", "check the", testThe)
 eg("csv", "check csv", testCsv)
 eg("data", "check data", testData)
 eg("stats", "check stats", testStats)
-
+eg("around","check around",testAround)
+eg("clone","check clone",testClone)
+eg("cluster","check cluster",testCluster)
+eg("half","check half",testHalf)
+eg("optimize","check optimize",testOptimize)
 
 
 const = Constants.Constants()

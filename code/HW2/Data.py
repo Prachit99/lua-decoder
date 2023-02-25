@@ -12,8 +12,6 @@ class Data:
             csv(src,fun)
         else:
             for row in src:
-                print(f'row: {row}')
-                print(f'type: {type(row)}')
                 self.add(row)
 
     def add(self,t):

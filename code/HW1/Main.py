@@ -50,9 +50,7 @@ def main(options,help,funs):
 
     else:
         # print("reached 56")
-        print(funs)
         for what,fun, in funs.items():
-            print("reached 56")
             if options['go'] == 'all' or what == options['go']:
                 for k, v in saved.items():
                     options[k] = v

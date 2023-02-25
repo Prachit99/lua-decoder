@@ -1,4 +1,4 @@
-from Utils import csv
+import Utils
 import Constants
 n = 0
 def no_of_chars(t):
@@ -7,5 +7,5 @@ def no_of_chars(t):
 
 def testCsv():
     file = Constants.Constants().file
-    csv(file,no_of_chars)
+    Utils.csv(file,no_of_chars)
     return n == 8*399

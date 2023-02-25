@@ -1,17 +1,10 @@
 from Utils import csv
-from Utils import map
 from Utils import kap
-from Utils import sort
-from Utils import cosine
-from Utils import many
-from Utils import any
-from Utils import push
-from Utils import lt
 import Utils 
 from Row import Row
 from Cols import Cols
 import math
-import The
+from Constants import Constants
 
 class Data:
     def __init__(self,src):
@@ -22,8 +15,6 @@ class Data:
             csv(src,fun)
         else:
             for row in src:
-                print(f'row: {row}')
-                print(f'type: {type(row)}')
                 self.add(row)
 
     def add(self,t):
@@ -45,13 +36,10 @@ class Data:
         return kap(cols or self.cols.y, fun)
 
 
-    def clone(self,init=None):
-        data=Data(list(self.cols.names))
+    def clone(self,init={}):
+        data=Data([self.cols.names])
         fun=lambda x: data.add(x)
-        if init:
-            Utils.map(init,fun)
-        else:
-            Utils.map([],fun)
+        x=list(map(fun, init))
         return data
 
 
@@ -76,8 +64,8 @@ class Data:
             li=self.cols.x
         for col in li:
             n+=1
-            d+=pow(col.dist(row1.cells[col.at],row2.cells[col.at]),The.p)
-        return pow((d/n),(1/The.p))
+            d+=pow(col.dist(row1.cells[col.at],row2.cells[col.at]),Constants().p)
+        return pow((d/n),(1/Constants().p))
     
 
     def around(self,row1,rows=None,cols=None):
@@ -93,31 +81,32 @@ class Data:
 
 
     def half(self,rows=None,cols=None,above=None):
-        some=Utils.many(rows,The.Sample)
-        A=above if above != None else Utils.any(some)
-        B=self.around(A,some)[The.Far*len(rows)//1].row
-        c=self.dist(A,B,cols)
-        def project(row,A,B,c,cols):
-            return {row,cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
         rows=rows if rows!=None else self.rows
+        some=Utils.many(rows,Constants().sample)
+        A=above if above != None else Utils.any(some)
+        B=self.around(A,some)[int(Constants().far*len(rows))][0]
+        c=self.dist(A,B,cols)
+        def project(row):
+            return {'row':row,'dist':Utils.cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
         left=[]
         right=[]
-        for n,tmp in enumerate(sort(Utils.map(rows,project),lt("dist"))):
+        fun = lambda x: x['dist']
+        for n,tmp in enumerate(Utils.sort(map(project, rows), fun)):
             if n<=(len(rows)//2):
-                push(left,tmp.row)
-                mid=tmp.row
+                left.append(tmp['row'])
+                mid=tmp['row']
             else:
-                push(right,tmp.row)
+                right.append(tmp['row'])
         return left,right,A,B,mid,c
     
 
     def cluster(self,rows=None,minn=None,cols=None,above=None):
         rows=rows if rows!=None else self.rows
-        minn=minn if minn!=None else pow(len(rows),The.minn)
+        minn=minn if minn!=None else pow(len(rows),Constants().min)
         cols=cols if cols!=None else self.cols.x
         node={"data":self.clone(rows)}
-        if len(rows)>2*minn:
-            left,right,node["A"],node["B"],node["mid"]=self.half(rows,cols,above)
+        if len(rows)>=2*minn:
+            left,right,node["A"],node["B"],node["mid"],c=self.half(rows,cols,above)
             node["left"]=self.cluster(left,minn,cols,node["A"])
             node["right"]=self.cluster(right,minn,cols,node["B"])
         return node
@@ -125,14 +114,14 @@ class Data:
 
     def sway(self,rows=None,minn=None,cols=None,above=None):
         rows=rows if rows!=None else self.rows
-        minn=minn if minn!=None else pow(len(rows),The.minn)
+        minn=minn if minn!=None else pow(len(rows),Constants().min)
         cols=cols if cols!=None else self.cols.x
         node={"data":self.clone(rows)}
-        if len(rows)>2*minn:
+        if len(rows)>=2*minn:
             left,right,node["A"],node["B"],node["mid"],node["c"]=self.half(rows,cols,above)
             if self.better(node["B"],node["A"]):
                 left,right,node["A"],node["B"]=right,left,node["B"],node["A"]
-            node.left=self.sway(left,minn,cols,node["A"])
+            node['left']=self.sway(left,minn,cols,node["A"])
         return node
 
 

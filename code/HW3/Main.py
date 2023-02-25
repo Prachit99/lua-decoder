@@ -45,7 +45,7 @@ def main(options,help,funs):
                 for k, v in saved.items():
                     options[k] = v
                 # seed = options['seed']
-                if funs[what](1) == False:
+                if funs[what]() == False:
                     fails += 1
                     print("❌ fail:", what)
                 else:

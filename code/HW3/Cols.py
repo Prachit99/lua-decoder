@@ -1,6 +1,7 @@
 import re
-import Num
-import Sym
+from Num import Num
+from Sym import Sym
+
 
 class Cols:
     def __init__(self,t):
@@ -10,6 +11,7 @@ class Cols:
         self.y=[]
         self.klass=None
         for n,s in enumerate(t):
+            s=str(s)
             col = Num(n,s) if re.findall("^[A-Z]+",s) else Sym(n,s)
             self.all.append(col)
             if not re.findall("X$",s):
