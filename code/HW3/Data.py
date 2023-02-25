@@ -1,17 +1,9 @@
 from Utils import csv
-from Utils import map
 from Utils import kap
-from Utils import sort
-from Utils import cosine
-from Utils import many
-from Utils import any
-from Utils import push
-from Utils import lt
 import Utils 
 from Row import Row
 from Cols import Cols
 import math
-import The
 
 class Data:
     def __init__(self,src):
@@ -22,8 +14,6 @@ class Data:
             csv(src,fun)
         else:
             for row in src:
-                print(f'row: {row}')
-                print(f'type: {type(row)}')
                 self.add(row)
 
     def add(self,t):
