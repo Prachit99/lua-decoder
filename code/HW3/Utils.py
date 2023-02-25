@@ -102,3 +102,32 @@ def csv(filename: str, fun):
         t.append(row)
         fun(row)
     file.close()
+
+def show(node, what, cols, nPlaces, lvl = 0):
+  if node:
+    print('| ' * lvl + str(len(node['data'].rows)) + '  ', end = '')
+    if not node.get('left') or lvl==0:
+        print(node['data'].stats("mid",node['data'].cols.y,nPlaces))
+    else:
+        print('')
+    show(node.get('left'), what,cols, nPlaces, lvl+1)
+    show(node.get('right'), what,cols,nPlaces, lvl+1)
+
+def many(t,n):
+    u=[]
+    for r in range(1,n+1):
+        u.append(any(t))
+    return u
+
+def any(t):
+    return t[rint(0, len(t) - 1)]
+
+def cosine(a,b,c):
+    if c==0:
+        d=1
+    else:
+        d=2*c
+    x1 = (a**2 + c**2 - b**2) / d
+    x2 = max(0, min(1, x1))
+    y  = abs((a**2 - x2**2))**.5
+    return x2, y

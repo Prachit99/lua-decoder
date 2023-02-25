@@ -2,6 +2,10 @@ class Constants:
     def __init__(self):
         self.the = dict()
         self.seed = 937162211
+        self.p=2
+        self.sample=512
+        self.far= 0.95
+        self.min=0.5
         self.file = "../../../etc/data/auto93.csv"
         self.help = '''
             script.lua : an example script with help text and a test suite
