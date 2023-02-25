@@ -2,10 +2,13 @@ import sys
 sys.path.insert(1, "../")
 import Main
 import Constants
-from testNum import TestNum
-from testSym import TestSym
-from testThe import TestThe
-from testRand import TestRand
+from testNum import testNum
+from testSym import testSym
+from testThe import testThe
+from testRand import testRand
+from testCsv import testCsv
+from testData import testData
+from testStats import testStats
 
 
 egs = {}
@@ -17,12 +20,15 @@ def eg(key, s, fun):
     help += "  -g  {}\t{}\n".format(key, s)
 
 
-eg("rand", "check random", TestRand.testRand)
-eg("sym", "check syms", TestSym.testSym)
-eg("num", "check nums", TestNum.testNum)
-eg("the", "check the", TestThe.testThe)
+eg("rand", "check random", testRand)
+eg("sym", "check syms", testSym)
+eg("num", "check nums", testNum)
+eg("the", "check the", testThe)
+eg("csv", "check csv", testCsv)
+eg("data", "check data", testData)
+eg("stats", "check stats", testStats)
 
-# eg("csv","read from csv", check_csv)
+
 
 const = Constants.Constants()
 help = const.help
