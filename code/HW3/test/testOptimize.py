@@ -1,8 +1,9 @@
-# from Constants import Constants 
-# from Data import Data
+from Constants import Constants 
+from Data import Data
+import Utils
 
-# def testOptimize():
-#     file = Constants().file
-#     data = Data(file)
+def testOptimize():
+    file = Constants().file
+    data = Data(file)
 
-#     show(data.sway(),'mid',data.cols.y,1)
+    Utils.show(data.sway(),'mid',data.cols.y,1)
