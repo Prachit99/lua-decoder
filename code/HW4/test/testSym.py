@@ -3,7 +3,6 @@ sys.path.insert(1, "../")
 import Sym
 
 
-
 def testSym():
     strx = "aaaabbc"
     sym = Sym.Sym()

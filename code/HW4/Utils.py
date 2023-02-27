@@ -49,10 +49,9 @@ def oo(t):
 def coerce(s):
     s = str(s)
     def fun(s1):
-        s1 = s1.lower()
-        if s1 == "true":
+        if s1.lower() == "true":
             return True
-        elif s1 == "false":
+        elif s1.lower() == "false":
             return False
         else:
             return s1
@@ -68,26 +67,28 @@ def coerce(s):
         print("Coerce Error", exception)
 
 
-# Utility functions for Lists
-def map(t,fun):
-    u = []
-    for k,v in enumerate(t):
-        v,k = fun(k)
-        index = k if k != 0 else 1+len(u)
-        u[index] = v
-    return u
+# # Utility functions for Lists
+# def map(t,fun):
+#     u = []
+#     for k,v in enumerate(t):
+#         v,k = fun(k)
+#         index = k if k != 0 else 1+len(u)
+#         u[index] = v
+#     return u
 
 
-def kap(t,fun):
-    u = []
+def kap(t, fun):
+    u = {}
     for k,v in enumerate(t):
+        # print(k, v.txt)
         v,k = fun(k,v)
         index = k if k != 0 else 1 + len(u)
         u[index] = v
+    # print(u)
     return u
 
 
-def sort(t,fun):
+def sort(t, fun):
     return sorted(t, key = fun)
 
 
@@ -96,16 +97,13 @@ def keys(t):
 
 
 def csv(filename: str, fun):
-    f = io.open(filename)
-    while True:
-        s = f.read()
-        if s:
-            t = []
-            for s1 in re.findall("([^,]+)" ,s):
-                t.append(coerce(s1))
-            fun(t)
-        else:
-            return f.close()
+    file = io.open(filename)
+    t = []
+    for line in file.readlines():
+        row = list(map(coerce, line.strip().split(',')))
+        t.append(row)
+        fun(row)
+    file.close()
         
 
 def show(node, what, cols, nPlaces, lvl = 0):
@@ -118,16 +116,19 @@ def show(node, what, cols, nPlaces, lvl = 0):
     show(node.get('left'), what,cols, nPlaces, lvl+1)
     show(node.get('right'), what,cols,nPlaces, lvl+1)
 
-def many(t,n):
+
+def many(t, n):
     u=[]
     for r in range(1,n+1):
         u.append(any(t))
     return u
 
+
 def any(t):
     return t[rint(0, len(t) - 1)]
 
-def cosine(a,b,c):
+
+def cosine(a, b, c):
     if c==0:
         d=1
     else:
@@ -150,6 +151,7 @@ def repCols(cols, data):
     cols.insert(0, col_1)
     return data(cols)
 
+
 def repRows(t, data, rows):
     rows = copy.deepcopy(rows)
     for j,s in enumerate(rows[-1]):
@@ -163,11 +165,16 @@ def repRows(t, data, rows):
             row.append(u[len(u)-1])
     return data(rows)
 
+
 def doFile(file):
-    file = open(file, 'r', encoding='utf-8')
-    text  = re.findall(r'(?<=return )[^.]*', file.read())[0].replace('{', '[').replace('}',']').replace('=',':').replace('[\n','{\n' ).replace(' ]',' }' ).replace('\'', '"').replace('_', '"_"')
-    file.close()
-    return json.loads(re.sub("(\w+):", r'"\1":', text))
+    with open(file, 'r', encoding = 'utf-8') as file:
+        content  = file.read()
+        print(f'Content: {content}')
+        print(re.findall(r"(return\s+[^.]+)", content))
+        content = re.findall(r'(return\s+[^.]+)', content)[0]
+        text  = content.replace('{', '[').replace('}',']').replace('=',':').replace('[\n','{\n' ).replace(' ]',' }' ).replace('\'', '"').replace('_', '"_"')
+        file.close()
+        return json.loads(re.sub("(\w+):", r'"\1":', text))
 
 
 def transpose(t):
@@ -198,7 +205,7 @@ def repPlace(data):
         print(' '.join(g[y].values()))
 
 
-def repgrid(file, data):
+def repGrid(file, data):
     t = doFile(file)
     rows = repRows(t, data, transpose(t['cols']))
     cols = repCols(t['cols'], data)
