@@ -1,46 +1,46 @@
+from Utils import csv
+from Utils import kap
 import Utils 
 from Row import Row
 from Cols import Cols
 import math
-import The
+from Constants import Constants
 
 class Data:
-    def __init__(self,src=None):
+    def __init__(self,src):
         self.rows = []
         self.cols = None
         fun=lambda x: self.add(x)
         if type(src)==str:
-            self.csv(src,fun)
+            csv(src,fun)
         else:
-            if(src!=None):
-                Utils.csv(src,fun)
-            else:
-                Utils.map([],fun)
-    
+            for row in src:
+                self.add(row)
 
     def add(self,t):
-        if(len(self.cols)!=0):
-            t=Row(t)
+        if self.cols:
+            t = Row(t) if type(t) == list else t
             self.rows.append(t)
             self.cols.add(t)
         else:
             self.cols=Cols(t)
 
 
-    def clone(self,init=None):
-        data=Data(list(self.cols.names))
-        fun=lambda x: data.add(x)
-        if init:
-            Utils.map(init,fun)
-        else:
-            Utils.map([],fun)
-        return data
+    def stats(self,what,cols,nPlaces):
+        def fun(_, col):
+            if what == 'div':
+                val = col.div()
+            else:
+                val = col.mid()
+            return col.rnd(val, nPlaces), col.txt
+        return kap(cols or self.cols.y, fun)
 
-    def stats(self,what,cols,nPlaces,fun):
-        def fun(col):
-            temp = getattr(col, what)
-            return col.rnd(temp, nPlaces), col.txt
-        return Utils.kap(cols, fun)
+
+    def clone(self,init={}):
+        data=Data([self.cols.names])
+        fun=lambda x: data.add(x)
+        x=list(map(fun, init))
+        return data
     
 
     def dist(self,row1,row2,cols=None):
@@ -52,8 +52,8 @@ class Data:
             li=self.cols.x
         for col in li:
             n+=1
-            d+=pow(col.dist(row1.cells[col.at],row2.cells[col.at]),The.p)
-        return pow((d/n),(1/The.p))
+            d+=pow(col.dist(row1.cells[col.at],row2.cells[col.at]),Constants().p)
+        return pow((d/n),(1/Constants().p))
     
 
     def around(self,row1,rows=None,cols=None):
@@ -74,38 +74,69 @@ class Data:
 
 
     def half(self,rows=None,cols=None,above=None):
-        some=Utils.many(rows,The.Sample)
-        A=above if above != None else Utils.any(some)
-        B=self.around(A,some)[The.Far*len(rows)//1].row
-        c=self.dist(A,B,cols)
-        def project(row,A,B,c,cols):
-            return {row,Utils.cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
         rows=rows if rows!=None else self.rows
+        some=Utils.many(rows,Constants().sample)
+        A=above if above != None else Utils.any(some)
+        B=self.around(A,some)[int(Constants().far*len(rows))][0]
+        c=self.dist(A,B,cols)
+        def project(row):
+            return {'row':row,'dist':Utils.cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
         left=[]
         right=[]
-        for n,tmp in enumerate(Utils.sort(Utils.map(rows,project),Utils.lt("dist"))):
+        fun = lambda x: x['dist']
+        for n,tmp in enumerate(Utils.sort(map(project, rows), fun)):
             if n<=(len(rows)//2):
-                Utils.push(left,tmp.row)
-                mid=tmp.row
+                left.append(tmp['row'])
+                mid=tmp['row']
             else:
-                Utils.push(right,tmp.row)
+                right.append(tmp['row'])
         return left,right,A,B,mid,c
     
 
     def cluster(self,rows=None,minn=None,cols=None,above=None):
         rows=rows if rows!=None else self.rows
-        minn=minn if minn!=None else pow(len(rows),The.minn)
+        minn=minn if minn!=None else pow(len(rows),Constants().min)
         cols=cols if cols!=None else self.cols.x
         node={"data":self.clone(rows)}
-        if len(rows)>2*minn:
-            left,right,node["A"],node["B"],node["mid"]=self.half(rows,cols,above)
+        if len(rows)>=2*minn:
+            left,right,node["A"],node["B"],node["mid"],c=self.half(rows,cols,above)
             node["left"]=self.cluster(left,minn,cols,node["A"])
             node["right"]=self.cluster(right,minn,cols,node["B"])
         return node
     
 
+    def sway(self,rows=None,minn=None,cols=None,above=None):
+        rows=rows if rows!=None else self.rows
+        minn=minn if minn!=None else pow(len(rows),Constants().min)
+        cols=cols if cols!=None else self.cols.x
+        node={"data":self.clone(rows)}
+        if len(rows)>=2*minn:
+            left,right,node["A"],node["B"],node["mid"],node["c"]=self.half(rows,cols,above)
+            if self.better(node["B"],node["A"]):
+                left,right,node["A"],node["B"]=right,left,node["B"],node["A"]
+            node['left']=self.sway(left,minn,cols,node["A"])
+        return node
 
-        
 
+    def better(self,row1,row2):
+        s1=0
+        s2=0
+        ys=self.cols.y
+        for col in ys:
+            x=col.norm(row1.cells[col.at])
+            y=col.norm(row2.cells[col.at])
+            s1=s1-(pow(math.e,(col.w*(x-y))/len(ys)))
+            s2=s2-(pow(math.e,(col.w*(y-x))/len(ys)))
+        return s1/len(ys) < s2/len(ys)
+    
 
-
+    def tree(self, rows = None , minn = None, cols = None, above = None):
+        rows=rows if rows!=None else self.rows        
+        minn=minn if minn!=None else pow(len(rows),Constants().min)
+        cols=cols if cols!=None else self.cols.x
+        node={"data":self.clone(rows)}
+        if len(rows)>=2*minn:
+            left,right,node["A"],node["B"],node["mid"],node["c"]=self.half(rows,cols,above)
+            node["left"]=self.tree(left,minn,cols,node["A"])
+            node["right"]=self.tree(right,minn,cols,node["B"])
+        return node

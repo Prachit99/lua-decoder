@@ -1,20 +1,19 @@
 import math
 import Constants
 import io
-import re
 import copy
-import json
+import re
 
 const = Constants.Constants()
 seed = const.seed
 
 
 # Utility functions for numerics
-def rint(lo,hi):
+def rint(lo, hi):
     return math.floor(0.5 + rand(lo,hi))
 
 
-def rand(lo=0,hi=1):
+def rand(lo=0, hi=1):
     """
     This function generates the random number between a given range
     """
@@ -23,7 +22,7 @@ def rand(lo=0,hi=1):
     return lo + (hi - lo) * seed / 2147483647
 
 
-def rnd(n,nPlaces=3):
+def rnd(n, nPlaces=3):
     mult = 10**(nPlaces)
     return math.floor(n * mult + 0.5) / mult
 
@@ -49,10 +48,9 @@ def oo(t):
 def coerce(s):
     s = str(s)
     def fun(s1):
-        s1 = s1.lower()
-        if s1 == "true":
+        if s1.lower() == "true":
             return True
-        elif s1 == "false":
+        elif s1.lower() == "false":
             return False
         else:
             return s1
@@ -69,25 +67,27 @@ def coerce(s):
 
 
 # Utility functions for Lists
-def map(t,fun):
-    u = []
-    for k,v in enumerate(t):
-        v,k = fun(k)
-        index = k if k != 0 else 1+len(u)
-        u[index] = v
-    return u
+# def map(t,fun):
+    # u = []
+    # for k,v in enumerate(t):
+    #     v,k = fun(k)
+    #     index = k if k != 0 else 1+len(u)
+    #     u[index] = v
+    # return u
 
 
-def kap(t,fun):
-    u = []
+def kap(t, fun):
+    u = {}
     for k,v in enumerate(t):
+        # print(k, v.txt)
         v,k = fun(k,v)
         index = k if k != 0 else 1 + len(u)
         u[index] = v
+    # print(u)
     return u
 
 
-def sort(t,fun):
+def sort(t, fun):
     return sorted(t, key = fun)
 
 
@@ -96,17 +96,13 @@ def keys(t):
 
 
 def csv(filename: str, fun):
-    f = io.open(filename)
-    while True:
-        s = f.read()
-        if s:
-            t = []
-            for s1 in re.findall("([^,]+)" ,s):
-                t.append(coerce(s1))
-            fun(t)
-        else:
-            return f.close()
-        
+    file = io.open(filename)
+    t = []
+    for line in file.readlines():
+        row = list(map(coerce, line.strip().split(',')))
+        t.append(row)
+        fun(row)
+    file.close()
 
 def show(node, what, cols, nPlaces, lvl = 0):
   if node:
@@ -150,6 +146,7 @@ def repCols(cols, data):
     cols.insert(0, col_1)
     return data(cols)
 
+
 def repRows(t, data, rows):
     rows = copy.deepcopy(rows)
     for j,s in enumerate(rows[-1]):
@@ -162,6 +159,7 @@ def repRows(t, data, rows):
             u = t['rows'][-n]
             row.append(u[len(u)-1])
     return data(rows)
+
 
 def doFile(file):
     file = open(file, 'r', encoding='utf-8')
