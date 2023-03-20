@@ -52,6 +52,7 @@ eg("prototypes","check prototypes",testPrototypes)
 eg("position","check position",testPosition)
 eg("every", "check every",testEvery)
 
+
 const = Constants.Constants()
 help = const.help
 options = dict()

@@ -2,6 +2,7 @@ import Utils
 from Constants import Constants
 from Data import Data
 
+
 def testPrototypes():
     file = Constants().file
     t = Utils.doFile(file)

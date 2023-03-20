@@ -41,7 +41,17 @@ class Data:
         fun=lambda x: data.add(x)
         x=list(map(fun, init))
         return data
-    
+
+    def better(self,row1,row2):
+        s1=0
+        s2=0
+        ys=self.cols.y
+        for col in ys:
+            x=col.norm(row1.cells[col.at])
+            y=col.norm(row2.cells[col.at])
+            s1=s1-(pow(math.e,(col.w*(x-y))/len(ys)))
+            s2=s2-(pow(math.e,(col.w*(y-x))/len(ys)))
+        return s1/len(ys) < s2/len(ys)
 
     def dist(self,row1,row2,cols=None):
         n=0
@@ -66,11 +76,6 @@ class Data:
             around_li.append((r, self.dist(row1, r, cols)))
             around_li.sort(key = lambda x:x[1])
         return around_li
-    
-
-    def furthest(self,row1,rows,cols=None):
-        t=self.around(row1,rows,cols)
-        return t[len(t)]
 
 
     def half(self,rows=None,cols=None,above=None):
@@ -116,15 +121,3 @@ class Data:
                 left,right,node["A"],node["B"]=right,left,node["B"],node["A"]
             node['left']=self.sway(left,minn,cols,node["A"])
         return node
-
-
-    def better(self,row1,row2):
-        s1=0
-        s2=0
-        ys=self.cols.y
-        for col in ys:
-            x=col.norm(row1.cells[col.at])
-            y=col.norm(row2.cells[col.at])
-            s1=s1-(pow(math.e,(col.w*(x-y))/len(ys)))
-            s2=s2-(pow(math.e,(col.w*(y-x))/len(ys)))
-        return s1/len(ys) < s2/len(ys)

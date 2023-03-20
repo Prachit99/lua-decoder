@@ -1,6 +1,7 @@
 from Data import Data
 from Constants import Constants
 
+
 def testStats():
     file = Constants().file
     data = Data(file)

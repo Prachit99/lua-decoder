@@ -103,6 +103,7 @@ def csv(filename: str, fun):
         fun(row)
     file.close()
 
+
 def show(node, what, cols, nPlaces, lvl = 0):
   if node:
     print('| ' * lvl + str(len(node['data'].rows)) + '  ', end = '')
@@ -113,14 +114,17 @@ def show(node, what, cols, nPlaces, lvl = 0):
     show(node.get('left'), what,cols, nPlaces, lvl+1)
     show(node.get('right'), what,cols,nPlaces, lvl+1)
 
+
 def many(t,n):
     u=[]
     for r in range(1,n+1):
         u.append(any(t))
     return u
 
+
 def any(t):
     return t[rint(0, len(t) - 1)]
+
 
 def cosine(a,b,c):
     if c==0:

@@ -3,6 +3,7 @@ sys.path.insert(1, "../")
 import Num
 from Utils import rand, rnd, seed
 
+
 def testRand():
     num1 = Num.Num()
     num2 = Num.Num()
