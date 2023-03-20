@@ -1,16 +1,16 @@
 import Utils
 import Constants
 
-
-n = 0
-
-
-def no_of_chars(t):
-    global n 
-    n += len(t)
+class TestCsv:
+    n = 0
 
 
-def testCsv():
-    file = Constants.Constants().file
-    Utils.csv(file,no_of_chars)
-    return n == 3192
+    def no_of_chars(t):
+        global n 
+        n += len(t)
+
+
+    def testCsv(self):
+        file = Constants.Constants().file
+        Utils.csv(file,TestCsv.no_of_chars)
+        return n == 3192

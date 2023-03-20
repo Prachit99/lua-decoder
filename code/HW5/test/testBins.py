@@ -3,7 +3,7 @@ sys.path.insert(1, "../")
 import Data
 import Constants
 from Utils import  rnd,o,value
-from Discretization import bins
+
 #dont know where bins function will be
 #donr know if to use o function
 #value in utils missing
@@ -13,7 +13,7 @@ class TestBins:
         data = Data.Data(Constants.Constants.file)
         best,rest = data.sway()
         print("all","","","",o({'best':len(best.rows), 'rest':len(rest.rows)}))
-        for t in bins(data.cols.x,{'best':best.rows, 'rest':rest.rows}):
+        for t in data.bins(data.cols.x,{'best':best.rows, 'rest':rest.rows}):
             for range in t:
                 if range['txt'] != b4:
                     print("")
