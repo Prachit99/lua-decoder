@@ -128,15 +128,3 @@ class Data:
             s1=s1-(pow(math.e,(col.w*(x-y))/len(ys)))
             s2=s2-(pow(math.e,(col.w*(y-x))/len(ys)))
         return s1/len(ys) < s2/len(ys)
-    
-
-    def tree(self, rows = None , minn = None, cols = None, above = None):
-        rows=rows if rows!=None else self.rows        
-        minn=minn if minn!=None else pow(len(rows),Constants().min)
-        cols=cols if cols!=None else self.cols.x
-        node={"data":self.clone(rows)}
-        if len(rows)>=2*minn:
-            left,right,node["A"],node["B"],node["mid"],node["c"]=self.half(rows,cols,above)
-            node["left"]=self.tree(left,minn,cols,node["A"])
-            node["right"]=self.tree(right,minn,cols,node["B"])
-        return node
