@@ -1,8 +1,8 @@
 import math
 import Constants
 import io
-import re
 import copy
+import re
 import json
 
 const = Constants.Constants()
@@ -10,11 +10,11 @@ seed = const.seed
 
 
 # Utility functions for numerics
-def rint(lo,hi):
+def rint(lo, hi):
     return math.floor(0.5 + rand(lo,hi))
 
 
-def rand(lo=0,hi=1):
+def rand(lo=0, hi=1):
     """
     This function generates the random number between a given range
     """
@@ -23,7 +23,7 @@ def rand(lo=0,hi=1):
     return lo + (hi - lo) * seed / 2147483647
 
 
-def rnd(n,nPlaces=3):
+def rnd(n, nPlaces=3):
     mult = 10**(nPlaces)
     return math.floor(n * mult + 0.5) / mult
 
@@ -33,7 +33,7 @@ def fmt(**sControl):
     return print(sControl)
 
 
-def o(t,isKeys):
+def o(t):
     if type(t) != list:
         return str(t)
     def fun(k,v):
@@ -67,14 +67,14 @@ def coerce(s):
         print("Coerce Error", exception)
 
 
-# # Utility functions for Lists
+# Utility functions for Lists
 # def map(t,fun):
-#     u = []
-#     for k,v in enumerate(t):
-#         v,k = fun(k)
-#         index = k if k != 0 else 1+len(u)
-#         u[index] = v
-#     return u
+    # u = []
+    # for k,v in enumerate(t):
+    #     v,k = fun(k)
+    #     index = k if k != 0 else 1+len(u)
+    #     u[index] = v
+    # return u
 
 
 def kap(t, fun):
@@ -104,7 +104,7 @@ def csv(filename: str, fun):
         t.append(row)
         fun(row)
     file.close()
-        
+
 
 def show(node, what, cols, nPlaces, lvl = 0):
   if node:
@@ -167,14 +167,12 @@ def repRows(t, data, rows):
 
 
 def doFile(file):
-    with open(file, 'r', encoding = 'utf-8') as file:
-        content  = file.read()
-        print(f'Content: {content}')
-        print(re.findall(r"(return\s+[^.]+)", content))
-        content = re.findall(r'(return\s+[^.]+)', content)[0]
-        text  = content.replace('{', '[').replace('}',']').replace('=',':').replace('[\n','{\n' ).replace(' ]',' }' ).replace('\'', '"').replace('_', '"_"')
-        file.close()
-        return json.loads(re.sub("(\w+):", r'"\1":', text))
+    file = open(file, 'r', encoding='utf-8')
+    #print(re.findall(r'(?<=return )[^.]*', file.read())[0])
+    text  = re.findall(r'(?<=return )[^.]*', file.read())[0].replace('{', '[').replace('}',']').replace('=',':').replace('[\n','{\n' ).replace(' ]',' }' ).replace('\'', '"').replace('_', '"_"')
+    print(text)
+    file.close()
+    return json.loads(re.sub("(\w+):", r'"\1":', text))
 
 
 def transpose(t):
@@ -195,7 +193,9 @@ def repPlace(data):
     y_max = 0
     print('')
     for r,row in enumerate(data.rows):
+        print((data.rows))
         c = chr(97+r).upper()
+        print(row)
         print(c, row.cells[-1])
         x,y = row.x*n//1, row.y*n//1
         y_max = int(max(y_max,y+1))

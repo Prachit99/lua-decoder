@@ -42,7 +42,6 @@ class Data:
         x=list(map(fun, init))
         return data
 
-
     def better(self,row1,row2):
         s1=0
         s2=0
@@ -53,7 +52,6 @@ class Data:
             s1=s1-(pow(math.e,(col.w*(x-y))/len(ys)))
             s2=s2-(pow(math.e,(col.w*(y-x))/len(ys)))
         return s1/len(ys) < s2/len(ys)
-    
 
     def dist(self,row1,row2,cols=None):
         n=0
@@ -123,9 +121,3 @@ class Data:
                 left,right,node["A"],node["B"]=right,left,node["B"],node["A"]
             node['left']=self.sway(left,minn,cols,node["A"])
         return node
-
-
-        
-
-
-
