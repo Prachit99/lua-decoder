@@ -294,4 +294,4 @@ def bin(col, x):
     if x=="?" or isinstance(col, SYM):
         return x
     tmp = (col.hi - col.lo)/(Constants().bins - 1)
-    return  1 if col.hi == col.lo else math.floor(x/tmp + .5)*tmp
+    return 1 if col.hi == col.lo else math.floor(x/tmp + .5) * tmp
