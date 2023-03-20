@@ -9,6 +9,8 @@ class TestThe:
         return oo(the)
 
 
-if __name__ == '__main__':
-    result = TestThe.testThe(1)
-    print(result)
+
+
+# if __name__ == '__main__':
+#     result = TestThe.testThe(1)
+#     print(result)

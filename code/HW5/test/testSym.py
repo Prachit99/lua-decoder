@@ -16,6 +16,7 @@ class TestSym:
         return 1.38 == rnd(entropy)
 
 
-if __name__ == '__main__':
-        result = TestSym.testSym(1)
-        print(result)
+
+# if __name__ == '__main__':
+#         result = TestSym.testSym(1)
+#         print(result)

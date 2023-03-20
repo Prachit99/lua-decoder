@@ -15,6 +15,6 @@ class TestRand:
         for k,v in enumerate(t):
              assert(v==u[k])
 
-if __name__ == '__main__':
-        result = TestRand.testRand(1)
-        print(result)
+# if __name__ == '__main__':
+#         result = TestRand.testRand(1)
+#         print(result)

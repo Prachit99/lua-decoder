@@ -1,4 +1,5 @@
 import math
+from Constants import Constants
 
 class Num:
     def __init__(self, at = 0, txt = ""):
@@ -10,12 +11,15 @@ class Num:
         self.lo = math.inf
         self.hi = -math.inf
         self.w = -1 if txt.endswith("-") else 1
+        self.has= {}
 
 
     # Method to add 
     def add(self, n):
         if n != "?":
             self.n += 1
+            if self.n <= Constants().max:
+                self.has[n]= n
             d = n - self.mu
             self.mu = self.mu + d/self.n
             self.m2 = self.m2 + d*(n - self.mu)
