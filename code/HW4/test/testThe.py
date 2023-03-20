@@ -4,9 +4,6 @@ from Utils import oo
 import Constants
 import Main
 
-# the = Main.cli(Main.settings(Main.send_help()))
-
-
 
 def testThe():
     the = Constants.Constants().the
