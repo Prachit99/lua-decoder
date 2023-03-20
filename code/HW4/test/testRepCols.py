@@ -9,3 +9,4 @@ def testRepCols():
     t = repCols(doFile(Constants().file)['cols'], Data)
     cols = list(map(oo, t.cols.all))
     rows = list(map(oo, t.rows))
+

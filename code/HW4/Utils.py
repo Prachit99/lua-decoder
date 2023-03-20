@@ -3,6 +3,7 @@ import Constants
 import io
 import copy
 import re
+import json
 
 const = Constants.Constants()
 seed = const.seed
@@ -32,7 +33,7 @@ def fmt(**sControl):
     return print(sControl)
 
 
-def o(t,isKeys):
+def o(t):
     if type(t) != list:
         return str(t)
     def fun(k,v):
@@ -163,7 +164,9 @@ def repRows(t, data, rows):
 
 def doFile(file):
     file = open(file, 'r', encoding='utf-8')
+    #print(re.findall(r'(?<=return )[^.]*', file.read())[0])
     text  = re.findall(r'(?<=return )[^.]*', file.read())[0].replace('{', '[').replace('}',']').replace('=',':').replace('[\n','{\n' ).replace(' ]',' }' ).replace('\'', '"').replace('_', '"_"')
+    print(text)
     file.close()
     return json.loads(re.sub("(\w+):", r'"\1":', text))
 
@@ -186,7 +189,9 @@ def repPlace(data):
     y_max = 0
     print('')
     for r,row in enumerate(data.rows):
+        print((data.rows))
         c = chr(97+r).upper()
+        print(row)
         print(c, row.cells[-1])
         x,y = row.x*n//1, row.y*n//1
         y_max = int(max(y_max,y+1))

@@ -6,7 +6,7 @@ class Constants:
         self.sample=512
         self.far= 0.95
         self.min=0.5
-        self.file = "../../../etc/data/auto93.csv"
+        self.file = "../../../etc/data/repgrid.csv"
         self.help = '''
             script.lua : an example script with help text and a test suite
             (c)2022, Tim Menzies <timm@ieee.org>, BSD-2 
