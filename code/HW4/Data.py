@@ -5,6 +5,8 @@ from Row import Row
 from Cols import Cols
 import math
 from Constants import Constants
+from operator import itemgetter
+
 
 
 class Data:
@@ -82,40 +84,61 @@ class Data:
         return around_li
 
     
-    def furthest(self,row1,rows,cols=None):
+    def furthest(self,row1,rows=None,cols=None):
         t=self.around(row1,rows,cols)
-        return t[len(t)]
+        return t[len(t)-1]
 
     
     def half(self,rows=None,cols=None,above=None):
+        def dist(row1,row2):
+            return self.dist(row1,row2,cols)
+        
         rows=rows if rows!=None else self.rows
         some=Utils.many(rows,Constants().sample)
         A=above if above != None else Utils.any(some)
-        B=self.around(A,some)[int(Constants().far*len(rows))][0]
-        c=self.dist(A,B,cols)
+        # print(self.furthest(A,rows))
+        B=self.furthest(A,rows)[0]
+        c=dist(A,B)
+        left, right = [], []
+
         def project(row):
-            return {'row':row,'dist':Utils.cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
-        left=[]
-        right=[]
-        fun = lambda x: x['dist']
-        for n,tmp in enumerate(Utils.sort(map(project, rows), fun)):
-            if n<=(len(rows)//2):
+            x, y = Utils.cosine(dist(row,A), dist(row,B), c)
+            try:
+                row.x = row.x
+                row.y = row.y
+            except:
+                row.x = x
+                row.y = y
+            return {'row' : row, 'x' : x, 'y' : y}
+        for n,tmp in enumerate(sorted(list(map(project, rows)), key=itemgetter('x'))):
+            if n < len(rows)//2:
                 left.append(tmp['row'])
-                mid=tmp['row']
+                mid = tmp['row']
             else:
                 right.append(tmp['row'])
-        return left,right,A,B,mid,c
+        return left, right, A, B, mid, c
+        #     return {'row':row,'dist':Utils.cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
+        # left=[]
+        # right=[]
+        # fun = lambda x: x['dist']
+        # for n,tmp in enumerate(Utils.sort(map(project, rows), fun)):
+        #     if n<=(len(rows)//2):
+        #         left.append(tmp['row'])
+        #         mid=tmp['row']
+        #     else:
+        #         right.append(tmp['row'])
+        # return left,right,A,B,mid,c
     
 
-    def cluster(self,rows=None,minn=None,cols=None,above=None):
+    def cluster(self,rows=None,cols=None,above=None):
         rows=rows if rows!=None else self.rows
-        minn=minn if minn!=None else pow(len(rows),Constants().min)
+        # minn=minn if minn!=None else pow(len(rows),Constants().min)
         cols=cols if cols!=None else self.cols.x
         node={"data":self.clone(rows)}
-        if len(rows)>=2*minn:
-            left,right,node["A"],node["B"],node["mid"],c=self.half(rows,cols,above)
-            node["left"]=self.cluster(left,minn,cols,node["A"])
-            node["right"]=self.cluster(right,minn,cols,node["B"])
+        if len(rows)>=2:
+            left,right,node["A"],node["B"],node["mid"],node["c"]=self.half(rows,cols,above)
+            node["left"]=self.cluster(left,cols,node["A"])
+            node["right"]=self.cluster(right,cols,node["B"])
         return node
     
 

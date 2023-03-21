@@ -4,7 +4,7 @@ import io
 import copy
 import re
 import json
-from Sym import SYM
+from Sym import Sym
 
 const = Constants.Constants()
 seed = const.seed
@@ -190,9 +190,8 @@ def repPlace(data):
     y_max = 0
     print('')
     for r,row in enumerate(data.rows):
-        print((data.rows))
+        # print((data.rows))
         c = chr(97+r).upper()
-        print(row)
         print(c, row.cells[-1])
         x,y = row.x*n//1, row.y*n//1
         y_max = int(max(y_max,y+1))
@@ -202,7 +201,7 @@ def repPlace(data):
         print(' '.join(g[y].values()))
 
 
-def repgrid(file, data):
+def repGrid(file, data):
     t = doFile(file)
     rows = repRows(t, data, transpose(t['cols']))
     cols = repCols(t['cols'], data)
@@ -212,7 +211,7 @@ def repgrid(file, data):
 
 
 def RANGE(at,txt,lo,hi=None):
-    return {'at':at,'txt':txt,'lo':lo,'hi':lo or hi or lo,'y':SYM()}
+    return {'at':at,'txt':txt,'lo':lo,'hi':lo or hi or lo,'y':Sym()}
 
 
 def extend(range, n, s):
@@ -223,7 +222,7 @@ def extend(range, n, s):
 
 def merge(col1, col2):
   new = copy.deepcopy(col1)
-  if isinstance(col1, SYM):
+  if isinstance(col1, Sym):
       for n in col2.has:
         new.add(n)
   else:
@@ -285,13 +284,13 @@ def bins(cols, rowss):
                         ranges[k] = RANGE(col.at, col.txt, x)
                     extend(ranges[k], x, y)
         ranges = list(dict(sorted(ranges.items())).values())
-        r = ranges if isinstance(col, SYM) else mergeAny(ranges)
+        r = ranges if isinstance(col, Sym) else mergeAny(ranges)
         out.append(r)
     return out
 
 
 def bin(col, x):
-    if x=="?" or isinstance(col, SYM):
+    if x=="?" or isinstance(col, Sym):
         return x
     tmp = (col.hi - col.lo)/(Constants().bins - 1)
     return 1 if col.hi == col.lo else math.floor(x/tmp + .5) * tmp
