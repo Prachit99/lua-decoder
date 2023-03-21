@@ -10,7 +10,7 @@ from Utils import  rnd,o,value,bins
 
 def testBins():
     global b4
-    data = Data.Data(Constants.Constants.file)
+    data = Data.Data(Constants.Constants().file)
     best,rest = data.sway()
     print("all","","","",o({'best':len(best.rows), 'rest':len(rest.rows)}))
     for t in bins(data.cols.x,{'best':best.rows, 'rest':rest.rows}):

@@ -9,7 +9,8 @@ class Constants:
         self.min = 0.5
         self.max = 512
         self.bins = 16
-        self.file = "../../../etc/data/repgrid.csv"
+        self.rest = 4
+        self.file = "../../../etc/data/auto93.csv"
         self.help = '''
             script.lua : an example script with help text and a test suite
             (c)2022, Tim Menzies <timm@ieee.org>, BSD-2 

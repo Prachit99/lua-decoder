@@ -2,6 +2,7 @@ import sys
 sys.path.insert(1, "../")
 from Utils import rint
 
+
 def testRand():
      Seed=1
      t=[]
@@ -13,7 +14,3 @@ def testRand():
           u.append(rint(0,100))
      for k,v in enumerate(t):
           assert(v==u[k])
-
-# if __name__ == '__main__':
-#         result = TestRand.testRand(1)
-#         print(result)

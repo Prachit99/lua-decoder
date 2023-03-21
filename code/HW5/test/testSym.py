@@ -13,9 +13,3 @@ def testSym():
     entropy = sym.div()
     print(mode,rnd(entropy))
     return 1.38 == rnd(entropy)
-
-
-
-# if __name__ == '__main__':
-#         result = TestSym.testSym(1)
-#         print(result)

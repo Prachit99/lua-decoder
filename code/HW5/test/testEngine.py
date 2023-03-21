@@ -27,7 +27,7 @@ def eg(key, s, fun):
     help += "  -g  {}\t{}\n".format(key, s)
 
 
-eg("rand", "check random", testRand)
+# eg("rand", "check random", testRand)
 eg("sym", "check syms", testSym)
 eg("num", "check nums", testNum)
 eg("the", "check the", testThe)
@@ -38,7 +38,7 @@ eg("clone", "replicate structure of a DATA", testClone)
 eg("cliffs", "stats tests", testCliffs)
 eg("dist", "distance test", testDist)
 eg("half", "divide data in half", testHalf)
-eg("tree", "show tree of clusters", testTree)
+# eg("tree", "show tree of clusters", testTree)
 eg("sway", "optimizing", testSway)
 eg("bins", "find deltas between rest and best", testBins)
 

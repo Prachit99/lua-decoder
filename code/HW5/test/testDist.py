@@ -1,14 +1,14 @@
-import Constants
-import Data
-import Num
+from Constants import Constants
+from Data import Data
+from Num import Num
 from Utils import  oo,rnd
 
 
 def testDist():
-    file = Constants.Constants().file
-    data = Data.Data(file)
-    num=Num()
+    file = Constants().file
+    data = Data(file)
+    num = Num()
     for row in data.rows:
-        Num.add(num,Data.dist(row,data.rows[1]))
-    oo(lo=num.lo,hi=num.hi,mid=rnd(num.mid()),div=rnd(num.div()))
+        num.add(Data.dist(data, row, data.rows[1]))
+    print(num.lo, num.hi, rnd(num.mid()), rnd(num.div()))
     

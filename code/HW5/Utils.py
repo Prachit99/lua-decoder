@@ -309,7 +309,7 @@ def bins(cols, rowss):
 def bin(col, x):
     if x=="?" or isinstance(col, Sym):
         return x
-    tmp = (col.hi - col.lo)/(Constants().bins - 1)
+    tmp = (col.hi - col.lo)/(const.bins - 1)
     return 1 if col.hi == col.lo else math.floor(x/tmp + .5) * tmp
 
 

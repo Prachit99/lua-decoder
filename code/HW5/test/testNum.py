@@ -5,7 +5,6 @@ import Constants
 from Utils import rand,rnd
 
 
-
 def testNum():
      num1,num2 = Num.Num(),Num.Num()
      for i in range(1,10001):
