@@ -1,7 +1,6 @@
 from Utils import rnd, rand, cliffsDelta
 import sys
 sys.path.insert(1, "../")
-# assumed cliffsDelta going to be written in utils
 
 
 def testCliffs():

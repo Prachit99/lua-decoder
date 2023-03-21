@@ -12,4 +12,4 @@ def testSym():
     mode = sym.mid()
     entropy = sym.div()
     print(mode,rnd(entropy))
-    return 1.38 == rnd(entropy)
+    return (mode == "a" and 1.379 == round(entropy,3))

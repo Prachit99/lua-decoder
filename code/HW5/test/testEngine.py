@@ -27,7 +27,7 @@ def eg(key, s, fun):
     help += "  -g  {}\t{}\n".format(key, s)
 
 
-# eg("rand", "check random", testRand)
+eg("rand", "check random", testRand)
 eg("sym", "check syms", testSym)
 eg("num", "check nums", testNum)
 eg("the", "check the", testThe)

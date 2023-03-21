@@ -28,15 +28,17 @@ def cliffsDelta(ns1,ns2):
                 lt += 1
     return abs(lt - gt)/n >  const.cliffs
 # Utility functions for numerics
-def rint(lo, hi):
-    return math.floor(0.5 + rand(lo,hi))
+def rint(lo, hi, Seed = None):
+    return math.floor(0.5 + rand(lo,hi, Seed))
 
 
-def rand(lo=0, hi=1):
+def rand(lo=0, hi=1, Seed = None):
     """
     This function generates the random number between a given range
     """
     global seed
+    if(Seed):
+        seed = Seed
     seed = (16807 * seed) % 2147483647
     return lo + (hi - lo) * seed / 2147483647
 
