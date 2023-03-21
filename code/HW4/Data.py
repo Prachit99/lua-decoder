@@ -117,17 +117,6 @@ class Data:
             else:
                 right.append(tmp['row'])
         return left, right, A, B, mid, c
-        #     return {'row':row,'dist':Utils.cosine(self.dist(row,A,cols),self.dist(row,B,cols),c)}
-        # left=[]
-        # right=[]
-        # fun = lambda x: x['dist']
-        # for n,tmp in enumerate(Utils.sort(map(project, rows), fun)):
-        #     if n<=(len(rows)//2):
-        #         left.append(tmp['row'])
-        #         mid=tmp['row']
-        #     else:
-        #         right.append(tmp['row'])
-        # return left,right,A,B,mid,c
     
 
     def cluster(self,rows=None,cols=None,above=None):
