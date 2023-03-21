@@ -13,8 +13,10 @@ def testBins():
     data = Data.Data(Constants.Constants().file)
     best,rest = data.sway()
     print("all","","","",o({'best':len(best.rows), 'rest':len(rest.rows)}))
-    for t in bins(data.cols.x,{'best':best.rows, 'rest':rest.rows}):
+    b4 = []
+    for k,t in enumerate(bins(data.cols.x,{'best':best.rows, 'rest':rest.rows})):
         for range in t:
+            print(range['txt'])
             if range['txt'] != b4:
                 print("")
             b4 = range['txt']

@@ -334,3 +334,13 @@ def value(has,nB = None, nR = None, sGoal = None):
     b = b/(nB+1/float("inf"))
     r = r/(nR+1/float("inf"))
     return pow(b,2)/(b+r)
+
+def showTree(node, what, cols, nPlaces, lvl = 0):
+  if node:
+    print('|.. ' * lvl + '[' + str(len(node['data'].rows)) + ']' + '  ', end = '')
+    if not node.get('left') or lvl==0:
+        print(node['data'].stats("mid",node['data'].cols.y,nPlaces))
+    else:
+        print('')
+    showTree(node.get('left'), what,cols, nPlaces, lvl+1)
+    showTree(node.get('right'), what,cols,nPlaces, lvl+1)

@@ -145,3 +145,16 @@ class Data:
                 return worker(l,worse,A)
         best,rest = worker(data.rows,[])
         return self.clone(best), self.clone(rest)
+    
+    def tree(self, rows = None , min = None, cols = None, above = None):
+        rows = rows if rows != None else self.rows
+        min = min if min != None else len(rows)**Constants().min
+        cols = cols if cols != None else self.cols.x
+        
+        node = { 'data' : self.clone(rows) }
+        if len(rows) >= 2*min:
+            left, right, node['A'], node['B'], node['mid'], _ = self.half(rows,cols,above)
+            node['left']  = self.tree(left,  min, cols, node['A'])
+            node['right'] = self.tree(right, min, cols, node['B'])
+        return node
+
