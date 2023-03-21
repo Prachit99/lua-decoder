@@ -3,6 +3,7 @@ class Constants:
         self.the = dict()
         self.seed = 937162211
         self.p = 2
+        self.cliffs=0.147
         self.sample = 512
         self.far = 0.95
         self.min = 0.5

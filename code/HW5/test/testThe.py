@@ -3,10 +3,10 @@ sys.path.insert(1, "../code")
 from Utils import oo
 import Constants
 
-class TestThe:
-    def testThe(self):
-        the = Constants.Constants().the
-        return oo(the)
+
+def testThe():
+    the = Constants.Constants().the
+    return oo(the)
 
 
 
