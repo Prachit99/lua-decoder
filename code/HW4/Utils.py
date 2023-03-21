@@ -193,9 +193,8 @@ def repPlace(data):
     y_max = 0
     print('')
     for r,row in enumerate(data.rows):
-        print((data.rows))
+        # print((data.rows))
         c = chr(97+r).upper()
-        print(row)
         print(c, row.cells[-1])
         x,y = row.x*n//1, row.y*n//1
         y_max = int(max(y_max,y+1))

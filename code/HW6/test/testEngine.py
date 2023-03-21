@@ -16,7 +16,7 @@ from testHalf import testHalf
 from testTree import testTree
 from testSway import testSway
 from testBins import testBins
-
+from testXpln import testXpln
 
 egs = {}
 
@@ -41,6 +41,7 @@ eg("half", "divide data in half", testHalf)
 eg("tree", "show tree of clusters", testTree)
 eg("sway", "optimizing", testSway)
 eg("bins", "find deltas between rest and best", testBins)
+eg("xpln","explore explanation sets",testXpln)
 
 const = Constants.Constants()
 help = const.help
