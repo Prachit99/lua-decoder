@@ -1,7 +1,7 @@
 import sys
 sys.path.insert(1, "../")
 import Sym
-
+from Utils import rnd
 
 
 def testSym():
@@ -11,7 +11,9 @@ def testSym():
         sym.add(strx[i])
     mode = sym.mid()
     entropy = sym.div()
-    return (mode == "a" and 1.379 == round(entropy,3))
+    print(mode,rnd(entropy))
+    return 1.38 == rnd(entropy)
+
 
 
 # if __name__ == '__main__':

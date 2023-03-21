@@ -1,18 +1,18 @@
 import sys
 sys.path.insert(1, "../")
-import Num
-from Utils import rand, rnd, seed
+from Utils import rint
 
 def testRand():
-    num1 = Num.Num()
-    num2 = Num.Num()
-    local_seed = seed 
-    for i in range(1,1001):
-        num1.add(rand(0,1))
-        num2.add(rand(0,1))
-    m1 = rnd(num1.mid(),1)
-    m2 = rnd(num2.mid(),1)
-    return (m1==m2 and rnd(m1,1)==0.5)
+     Seed=1
+     t=[]
+     for i in range(1,1001):
+          t.append(rint(0,100))
+     Seed=1
+     u=[]
+     for i in range(1,1001):
+          u.append(rint(0,100))
+     for k,v in enumerate(t):
+          assert(v==u[k])
 
 # if __name__ == '__main__':
 #         result = TestRand.testRand(1)
