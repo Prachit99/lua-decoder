@@ -1,7 +1,13 @@
 import Constants
 import Data
+from Utils import  oo
+
 
 def testData():
     file = Constants.Constants().file
     data = Data.Data(file)
-    return len(data.rows) == 398 and data.cols.y[0].w == -1 and data.cols.x[1].at == 1 and len(data.cols.x) == 4
+    col = data.cols.x[0]
+    print(col.lo, col.hi, col.mid(), col.div())
+    oo(data.stats('mid', data.cols.y, 2))
+
+

@@ -132,13 +132,16 @@ class Data:
     
 
     def sway(self,rows=None,minn=None,cols=None,above=None):
-        rows=rows if rows!=None else self.rows
-        minn=minn if minn!=None else pow(len(rows),Constants().min)
-        cols=cols if cols!=None else self.cols.x
-        node={"data":self.clone(rows)}
-        if len(rows)>=2*minn:
-            left,right,node["A"],node["B"],node["mid"],node["c"]=self.half(rows,cols,above)
-            if self.better(node["B"],node["A"]):
-                left,right,node["A"],node["B"]=right,left,node["B"],node["A"]
-            node['left']=self.sway(left,minn,cols,node["A"])
-        return node
+        data = self
+        def worker(rows, worse, above = None):
+            if len(rows) <= len(data.rows)**Constants().min: 
+                return rows, Utils.many(worse, Constants().rest * len(rows))
+            else:
+                l,r,A,B,_,_ = self.half(rows, None, above)
+                if self.better(B,A):
+                    l,r,A,B = r,l,B,A
+                for row in r:
+                    worse.append(row)
+                return worker(l,worse,A)
+        best,rest = worker(data.rows,[])
+        return self.clone(best), self.clone(rest)
