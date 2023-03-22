@@ -4,9 +4,11 @@ class Constants:
         self.seed = 937162211
         self.p = 2
         self.width = 40
-        self.cliffs=0.147
+        self.cliffs = 0.147
         self.conf = 0.05
+        self.cohen = 0.35
         self.bootstrap = 512
+        self.Fmt = "{:.2f}"
         self.sample = 512
         self.far = 0.95
         self.min = 0.5

@@ -37,14 +37,6 @@ def merge(rx1, rx2):
     return rx3
 
 
-# def rxs_sort(rxs):
-#     for i,x in enumerate(rxs):
-#      for j,y in enumerate(rxs):
-#          if mid(x) < mid(y):
-#              rxs[j],rxs[i]=rxs[i],rxs[j]
-#     return rxs
-
-
 def tiles(rxs):
     def of(x,most):
         return int(max(0, min(most, x)))
@@ -402,17 +394,12 @@ def extend(range, n, s):
     range['y'].add(s)
 
 
-def merge(col1, col2):
-  new = copy.deepcopy(col1)
-  if isinstance(col1, Sym):
-      for n in col2.has:
-        new.add(n)
-  else:
-    for n in col2.has:
-        new.add(new, n)
-    new.lo = min(col1.lo, col2.lo)
-    new.hi = max(col1.hi, col2.hi) 
-  return new
+def merge(rx1,rx2):
+    rx3 = RX([], rx1['name'])
+    rx3['has'] = rx1['has'] + rx2['has']
+    rx3['has'] = sorted(rx3['has'])
+    rx3['n'] = len(rx3['has'])
+    return rx3
 
 
 def merge2(col1, col2):
@@ -477,12 +464,6 @@ def bin(col, x):
     tmp = (col.hi - col.lo)/(const.bins - 1)
     return 1 if col.hi == col.lo else math.floor(x/tmp + .5) * tmp
 
-
-
-# def diffs(nums1,nums2):
-#     def function(k,nums):
-#         return  cliffsDelta(nums.has,nums2[k].has),nums.txt
-#     return kap(nums1, function(k,nums))
 
 def value(has,nB = None, nR = None, sGoal = None):
     sGoal = sGoal if sGoal else True

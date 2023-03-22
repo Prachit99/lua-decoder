@@ -26,4 +26,4 @@ def testSk():
     for k,v in enumerate([a, b, c, d, e, f, g, h, j, k]):
         rxs.append(RX(v, "rx"+str(k+1)))
     for rx in tiles(scottKnot(rxs)):
-        print("", rx['rank'], rx['name'], rx['show'])
+        print(f"''\t{rx['rank']}\t{rx['name']}\t{rx['show']}")
