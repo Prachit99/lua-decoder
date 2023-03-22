@@ -1,4 +1,4 @@
-from Utils import csv
+from Utils import bins, csv, firstN, oo, prune, value
 from Utils import kap
 import Utils 
 from Row import Row
@@ -133,18 +133,18 @@ class Data:
 
     def sway(self,rows=None,minn=None,cols=None,above=None):
         data = self
-        def worker(rows, worse, above = None):
+        def worker(rows, worse,evals0=None, above = None):
             if len(rows) <= len(data.rows)**Constants().min: 
-                return rows, Utils.many(worse, Constants().rest * len(rows))
+                return rows, Utils.many(worse, Constants().rest * len(rows)),evals0
             else:
-                l,r,A,B,_,_ = self.half(rows, None, above)
+                l,r,A,B,c,evals = self.half(rows, None, above)
                 if self.better(B,A):
                     l,r,A,B = r,l,B,A
                 for row in r:
                     worse.append(row)
-                return worker(l,worse,A)
-        best,rest = worker(data.rows,[])
-        return self.clone(best), self.clone(rest)
+                return worker(l,worse,evals+evals0,A)
+        best,rest,evals = worker(data.rows,[],0)
+        return self.clone(best), self.clone(rest),evals
     
     def tree(self, rows = None , min = None, cols = None, above = None):
         rows = rows if rows != None else self.rows
@@ -157,4 +157,58 @@ class Data:
             node['left']  = self.tree(left,  min, cols, node['A'])
             node['right'] = self.tree(right, min, cols, node['B'])
         return node
+    
+    def rule(self,ranges,maxSize):
+        t={}
+        for range in ranges:
+            t[range['txt']] = t.get(range['txt']) if t.get(range['txt']) else []
+            t[range['txt']].append({'lo' : range['lo'],'hi' : range['hi'],'at':range['at']})
+        return prune(t, maxSize)
+    
+    def showRule(self,rule):
+        def pretty(range):
+            return range['lo'] if range['lo']==range['hi'] else [range['lo'], range['hi']]
+        def merges(attr,ranges):
+                return list(map(pretty,merge(sorted(ranges,key=itemgetter('lo'))))),attr
+        def merge(t0):
+            t,j =[],1
+            while j<=len(t0):
+                left = t0[j-1]
+                right=t0[j]
+                if right and left['hi']==right['lo']:
+                    left['hi']=right['hi']
+                    j+=1
+                t.append({'lo':left['lo'], 'hi':left['hi']})
+                j=j+1
+            return t if len(t0)==len(t) else merge(t) 
+        return kap(rule,merges)
+
+    
+    def xpln(self,best,rest):
+        tmp,maxSizes = [],{}
+        def v(has):
+            return value(has, len(best.rows), len(rest.rows), "best")
+        def score(ranges):
+            rule = self.rule(ranges,maxSizes)
+            if rule:
+                oo(self.showRule(rule))
+                bestr= self.selects(rule, best.rows)
+                restr= self.selects(rule, rest.rows)
+                if len(bestr) + len(restr) > 0: 
+                    return v({'best': len(bestr), 'rest':len(restr)}),rule
+        for ranges in bins(self.cols.x,{'best':best.rows, 'rest':rest.rows}):
+            maxSizes[ranges[1]['txt']] = len(ranges)
+            print("")
+            for range in ranges:
+                print(range['txt'], range['lo'], range['hi'])
+                tmp.append({'range':range, 'max':len(ranges),'val': v(range['y'].has)})
+        rule,most=firstN(sorted(tmp, key=itemgetter('val')),score)
+        return rule,most
+
+
+    
+    
+
+
+
 
