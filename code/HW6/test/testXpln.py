@@ -1,12 +1,12 @@
 import sys
 sys.path.insert(1, "../code")
-from Utils import *
+from Utils import o
 import Constants
 import Data
 
 
 def testXpln():
-    file= Constants.Constants.file
+    file= Constants.Constants().file
     data = Data.Data(file)
     best,rest,evals = data.sway()
     rule,most= data.xpln(best,rest)

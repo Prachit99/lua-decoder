@@ -1,4 +1,5 @@
 import math
+from operator import itemgetter
 import Constants
 import io
 import copy
@@ -344,3 +345,60 @@ def showTree(node, what, cols, nPlaces, lvl = 0):
         print('')
     showTree(node.get('left'), what,cols, nPlaces, lvl+1)
     showTree(node.get('right'), what,cols,nPlaces, lvl+1)
+
+
+
+
+def prune(rule, maxSize):
+    n=0
+    for txt,ranges in rule.items():
+        n += 1
+        if len(ranges) == maxSize[txt]:
+            n-=1
+            rule[txt] = None
+    if n > 0:
+        return rule
+    
+
+
+def firstN(sortedRanges,scoreFun):
+    print("")
+    def function(r):
+        print(r['range']['txt'],r['range']['lo'],r['range']['hi'],rnd(r['val']),o(r['range']['y'].has))
+    temp = list(map(function, sortedRanges))
+    first = sortedRanges[0]['val']
+    def useful(range):
+        if range['val']>0.05 and range['val']> first/10:
+            return range
+    sortedRanges = [x for x in sortedRanges if useful(x)]
+    most,out = -1, -1
+    for n in range(1,len(sortedRanges)+1):
+        slice = sortedRanges[0:n]
+        slice_range = [x['range'] for x in slice]
+        tmp,rule = scoreFun(slice_range)
+        if tmp and tmp > most:
+            out,most = rule,tmp
+    return out,most
+
+
+def selects(self, rule, rows):
+        def disjunction(ranges, row):
+            for range in ranges:
+                lo, hi, at = range['lo'], range['hi'], range['at']
+                x = row.cells[at]
+                if x == "?":
+                    return True
+                if lo == hi and lo == x:
+                    return True
+                if lo <= x and x < hi:
+                    return True
+            return False
+        def conjunction(row):
+            for ranges in rule.values():
+                if not disjunction(ranges, row):
+                    return False
+            return True
+        def function(r):
+            if conjunction(r):
+                return r
+        return list(map(function, rows))
