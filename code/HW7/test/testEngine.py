@@ -27,13 +27,13 @@ def eg(key, s, fun):
 eg("gauss", "check gauss", testGauss)
 eg("num", "check nums", testNum)
 eg("basic", "check basic", testBasic)
-eg("bootmu", "check bootmu", testBasic)
-eg("sample", "check sample", testBasic)
-eg("pre", "check pre", testBasic)
-eg("five", "check five", testBasic)
-eg("six", "check six", testBasic)
-eg("sk", "check sk", testBasic)
-eg("tiles", "check tiles", testBasic)
+eg("bootmu", "check bootmu", testBootmu)
+eg("sample", "check sample", testSample)
+eg("pre", "check pre", testPre)
+eg("five", "check five", testFive)
+eg("six", "check six", testSix)
+eg("sk", "check sk", testSk)
+eg("tiles", "check tiles", testTiles)
 
 
 

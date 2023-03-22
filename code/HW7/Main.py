@@ -29,10 +29,10 @@ def cli(s):
     return the
 
 
-def main(options,help,funs):
+def main(options, help, funs):
     saved = dict()
     fails = 0
-    for k,v in cli(help).items():
+    for k, v in cli(help).items():
         options[k] = v
         saved[k] = v
 
@@ -40,7 +40,7 @@ def main(options,help,funs):
         print(help)
 
     else:
-        for what,fun, in funs.items():
+        for what, fun in funs.items():
             if options['go'] == 'all' or what == options['go']:
                 for k, v in saved.items():
                     options[k] = v
