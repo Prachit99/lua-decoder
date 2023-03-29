@@ -12,6 +12,7 @@ from testSample import testSample
 from testSix import testSix
 from testSk import testSk
 from testTiles import testTiles
+from testOk import testOk
 
 
 
@@ -23,7 +24,7 @@ def eg(key, s, fun):
     egs[key] = fun
     help += "  -g  {}\t{}\n".format(key, s)
 
-
+eg("ok","check ok",testOk)
 eg("gauss", "check gauss", testGauss)
 eg("num", "check nums", testNum)
 eg("basic", "check basic", testBasic)
