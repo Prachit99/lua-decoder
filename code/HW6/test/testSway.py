@@ -7,7 +7,7 @@ from Utils import o
 
 def testSway():
     data = Data.Data(Constants.Constants().file)
-    best,rest = data.sway()
+    best,rest,eval = data.sway()
     print("\nall ", o(data.stats('mid', data.cols.y, 2)))
     print("    ", o(data.stats('div', data.cols.y, 2)))
     print("\nbest",o(best.stats('mid', data.cols.y, 2)))
