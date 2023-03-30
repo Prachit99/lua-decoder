@@ -34,7 +34,11 @@ jobs:
         flake8 . --count --select=E9,F63,F7,F82 --show-source --statistics
         # exit-zero treats all errors as warnings. The GitHub editor is 127 chars wide
         flake8 . --count --exit-zero --max-complexity=10 --max-line-length=127 --statistics
-    - name: HW2 Test Engine
+    - name: HW5 Test Engine
       run: |
-        cd code/HW2/test/
+        cd code/HW5/test/
+        python testEngine.py -g all
+    - name: HW7 Test Engine
+      run: |
+        cd code/HW7/test/
         python testEngine.py -g all
