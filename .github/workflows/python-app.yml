@@ -38,6 +38,10 @@ jobs:
       run: |
         cd code/HW5/test/
         python testEngine.py -g all
+    - name: HW6 Test Engine
+      run: |
+        cd code/HW6/test/
+        python testEngine.py -g all
     - name: HW7 Test Engine
       run: |
         cd code/HW7/test/
