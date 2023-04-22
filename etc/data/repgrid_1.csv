@@ -1,0 +1,21 @@
+    local _ = " "
+    return {
+     domain="dissementian platforms",
+     cols={   {'DieselCar', 5, 4, 3, 2, 2, 2, 2, 2, 5, 5, 'GasolineCar'},
+                   {'AllSeasonTires', 2, 2, 2, 4, 4, 1, 5, 5, 1, 2, 'WinterTires'},
+      {'CrewCabCar', 1, 3, 1, 3, 4, 5, 4, 4, 2, 2, 'QuadCabCar'},
+           {'MoonRoof' , 2, 2, 2, 2, 3, 5, 4, 2, 2, 2, 'SunRoof'},
+    {'ElectricCar', 2, 5, 3, 4, 2, 2, 3, 1, 1, 1, 'Non-ElectricCar'},
+          {'B-SegementCar', 2, 4, 3, 4, 4, 4, 1, 5, 2, 1, 'C-SegmentCar'},
+           {'All-WheelDrive', 1, 3, 2, 5, 2, 1, 5, 5, 1, 1, 'Four-WheelDrive'},
+          {'Small-SizedCar', 1, 2, 1, 1, 1, 5, 5, 5, 3, 3, 'Big-SizedCar'}},
+    rows={                      { _, _, _, _, _, _, _, _, _, 'ToyotaHighlander'},
+                                { _, _, _, _, _, _, _, _, 'ChevroletCamaro'},
+                                { _, _, _, _, _, _, _, 'NissanRogue'},
+                                { _, _, _, _, _, _, 'Chrysler300'},
+                                { _, _, _, _, _,  'HondaAccord'},
+                                { _, _, _, _,  'DodgeAvenger'},
+                                { _, _, _,  'FordMustang'},
+                                { _, _,  'TeslaModelS'},
+                                { _, 'Maruti800'},
+                                {'MahindraScorpia'}} }
