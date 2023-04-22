@@ -108,6 +108,12 @@ def kap(t, fun):
     # print(u)
     return u
 
+def dkap(t, fun):
+    u = {}
+    for k,v in t.items():
+        v, k = fun(k,v) 
+        u[k or len(u)] = v
+    return u
 
 def sort(t, fun):
     return sorted(t, key = fun)
